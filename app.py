@@ -51,11 +51,6 @@ def get_tweets(mention):
                 for ent in doc.ents:
                     mention.append(ent.text)
                     
-                    # Store entities in dictionary
-#                     tweet_dict["text"].append(ent.text)
-#                     tweet_dict["label"].append(ent.label_)
- 
-
                 
         return mention
 
@@ -90,14 +85,14 @@ def plot_chart (user):
     now = datetime.now()
     now = now.strftime("%Y-%m-%d %H:%M")
 
-    plt.title(f"Sentiment Analysis of Tweets {now} for {user}")
+    plt.title(f"Sentiment Analysis of Tweets for {user}")
     plt.xlim([x.max(),x.min()]) #Bonus
     plt.ylabel("Tweet Polarity")
     plt.xlabel("Tweets Ago")
     plt.savefig("fig.png")
     
     api.update_with_media(
-            "fig.png", f"Sentiment Analysis of Tweets for {user} on {now}"
+            "fig.png", f"Sentiment Analysis of Tweets on {now}"
         )
         
       
@@ -106,6 +101,7 @@ run = True
 while run:
     print("Updating Twitter")
     try:
+        mention = []
         get_tweets(mention)
         
         compound_list = []
